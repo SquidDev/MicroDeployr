@@ -1,0 +1,21 @@
+{
+    "name": "squiddev/micro-deployr",
+    "description": "A tiny utility to deploy files",
+    "version": "1.0.0",
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.6"
+    },
+    "autoload": {
+        "psr-4": {"SquidDev\\Deploy\\": "src/"}
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SquidDev",
+            "email": "bonzoweb@hotmail.co.uk"
+        }
+    ]
+}
