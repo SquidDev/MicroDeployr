@@ -78,12 +78,16 @@ class FTPVisitor implements IVisitor {
 	 * {@inheritdoc}
 	 */
 	public function visitFile($path) {
-		if($this->child != NULL) $this->child->visitFile($path);
-
 		$directory = dirname($path);
 		if(!isset($this->dirs[$directory])) {
-			@ftp_mkdir($this->connection, $this->remote . $directory);
-			$this->dirs[$directory] = true;
+			$dir = '';
+			foreach(explode('/', $directory) as $subDir) {
+				$dir = trim($dir . '/' . $subDir, '/');
+				if(!isset($this->dirs[$dir])) {
+					@ftp_mkdir($this->connection, $this->remote . $dir);
+					$this->dirs[$dir] = true;
+				}
+			}
 		}
 
 		if(!ftp_put($this->connection, $this->remote . $path, $this->local . $path, $this->guessType($path))) {
